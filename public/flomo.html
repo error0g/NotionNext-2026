@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>flomo · 浮墨笔记</title>
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body { background: #fafafa; color: #323232; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      header, .memos { width: min(600px, calc(100% - 32px)); margin: 0 auto; }
+      .logo { padding: 40px 0; border-bottom: 1px solid #efefef; color: #202020; font-size: 30px; font-weight: 700; letter-spacing: -1px; text-align: center; }
+      .top { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+      .user { padding: 40px 0; }
+      .name { color: #454545; font-size: 16px; }
+      .date { margin-top: 4px; color: #9d9d9d; font-size: 12px; }
+      .filter { display: none; justify-content: flex-end; align-items: center; gap: 10px; }
+      .filter select, .filter button { height: 36px; padding: 0 10px; border: 0; border-radius: 3px; font-size: 14px; }
+      .filter select { max-width: 140px; background: #efefef; color: #777; }
+      .filter button { background: #30cf79; color: #fff; cursor: pointer; }
+      .memo { margin: 20px 0; padding: 20px; border-radius: 6px; background: #fff; overflow-wrap: anywhere; }
+      .memo:hover { box-shadow: 0 2px 10px #ddd; }
+      .time { margin-bottom: 8px; color: #8d8d8d; font-size: 12px; }
+      .content { color: #323232; font-size: 14px; }
+      .content p { min-height: 20px; margin: 0; line-height: 1.8; }
+      .content ul, .content ol { margin: 0; padding-inline-start: 22px; }
+      .content li { line-height: 1.8; }
+      .files img { max-width: 100%; margin: 6px 0; border: 1px solid #e6e6e6; border-radius: 4px; }
+      .audio-player { width: 100%; margin-top: 10px; padding: 10px; border-radius: 6px; background: #f7f7f7; }
+      .audio-player audio { width: 100%; }
+      .audio-player__content { margin-top: 10px; padding-top: 10px; border-top: 1px solid #eee; color: #555; font-size: 14px; line-height: 1.8; white-space: pre-wrap; }
+      .empty { padding: 60px 0; color: #9d9d9d; text-align: center; }
+      @media (max-width: 600px) {
+        .top { align-items: flex-start; flex-direction: column; }
+        .user { padding: 28px 0 0; }
+        .filter { width: 100%; padding-bottom: 28px; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">flomo</div>
+      <div class="top">
+        <div class="user">
+          <div class="name">@麦兜</div>
+          <div class="date">于 2026-09-10 导出 40 条 MEMO</div>
+        </div>
+        <div class="filter">
+          <select id="date" aria-label="选择年月">
+            <option value="">选择年月</option>
+            <option value="2026-09">2026-09</option><option value="2026-08">2026-08</option><option value="2026-07">2026-07</option><option value="2026-06">2026-06</option><option value="2026-05">2026-05</option><option value="2026-04">2026-04</option><option value="2026-03">2026-03</option>
+          </select>
+          <select id="tag" aria-label="选择标签">
+            <option value="">选择标签</option>
+            
+          </select>
+          <button id="filter-button" type="button">筛选</button>
+        </div>
+      </div>
+    </header>
+    <main class="memos">
+      <article class="memo" data-month="2026-09" data-tags=""><div class="time">2026-09-06 17:58:24</div><div class="content"><p>在匹配关系不对称的情况会出现中间层用于协调。</p><p>比如婚介，房子中介，计算机加多一层架构</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-09" data-tags=""><div class="time">2026-09-04 19:01:52</div><div class="content"><p>建立友谊关系，用价值观筛选。</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-08" data-tags=""><div class="time">2026-08-31 12:14:16</div><div class="content"><p>充足的睡眠和谦逊的态度能有效控制情绪</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-08" data-tags=""><div class="time">2026-08-24 10:57:09</div><div class="content"><p><strong>信息推广</strong></p><p>收集相关信息渠道，选择低成本付费多个渠道对比显著，缩小具体范围，不断逼近目标。</p><p><strong>有效结果 = 曝光量 × 人群命中率 × 需求强度  </strong></p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-08" data-tags=""><div class="time">2026-08-04 22:22:38</div><div class="content"><p>思维不等同自己，不要被思维牵引跑偏。</p><p>可以冥想用客观角度思考。</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-08" data-tags=""><div class="time">2026-08-03 09:33:19</div><div class="content"><p>多点耐心 再多点耐心。</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-07" data-tags=""><div class="time">2026-07-22 12:35:10</div><div class="content"><p>每次更换一个小的社会，就要跟随大流让自己提升到平均值，当达到平均值就需要独立思考超越平均值。</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-07" data-tags=""><div class="time">2026-07-18 22:26:40</div><div class="content"><p>软件开发本身就是一个自动化过程，是一笔高杠杆资源。</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-07" data-tags=""><div class="time">2026-07-10 05:36:41</div><div class="content"><p><mark>概率连续性</mark></p><p><strong>单次风险：p</strong></p><p><strong>连续 n 次至少发生一次：</strong></p><p><strong>1 - (1 - p)^n</strong></p><p><strong>n 越大，概率越接近 1。</strong></p><p><strong>长期重复暴露，小概率风险会累积。</strong></p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-07" data-tags=""><div class="time">2026-07-02 13:07:47</div><div class="content"><p>应当把资源投入到80%稳定性的，20%投入不确定的。</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-06" data-tags=""><div class="time">2026-06-13 22:54:04</div><div class="content"><p>像蜜蜂一样寻址投票新的股票，虽然不能保证每次都对。</p><p></p><p>统计学-大数定理 平均值</p><p>宏观经济学</p><p>公司财报</p><p>社会学估值</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-05" data-tags=""><div class="time">2026-05-29 14:51:55</div><div class="content"><p>“我”太不靠谱了，经常节能式偷懒，需要制定一些规则强制纠正。</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-05" data-tags=""><div class="time">2026-05-18 11:19:41</div><div class="content"><p><strong>大数定律最终会让随机误差互相抵消，回归平均值。（比如骰子概率最终会平均为1/6）</strong></p><p>问题</p><p>怎么找出大于平均值的收益？正期望</p><p>如何存活到<strong>大数定律？</strong></p><p>1、凯莉公式</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-05" data-tags=""><div class="time">2026-05-18 10:22:39</div><div class="content"><p>凯利公式：</p><p><strong>f = (bp - q) / b</strong></p><p>追求的不是单次赢最多，而是长期活下来并<strong><mark>复利</mark></strong>增长。</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-05" data-tags=""><div class="time">2026-05-14 12:18:47</div><div class="content"><p>运动和饮食等都能消除疲劳和部分不适的敏感度。</p><p>但是在此之前思考一下运作结构是不是有问题了，是否还能优化。</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-05" data-tags=""><div class="time">2026-05-13 15:00:01</div><div class="content"><p>不知之不知，需要在实践中才能发现那些不知道。 </p><p><strong><mark>这是AI 无法解决问题。</mark></strong></p><p>比如游泳用再完美再准确的公式描述也不能让身体学会游泳。</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-05" data-tags=""><div class="time">2026-05-09 13:32:01</div><div class="content"><p>认同一个结论需要发现它的<strong>局限性（背景信息）</strong>。</p><p></p><p>以上观点<strong>局限性</strong>是找出结论局限性一般都不简明直接。</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-04" data-tags=""><div class="time">2026-04-29 10:28:33</div><div class="content"><p>低状态日：</p><p>1、复盘</p><p>2、重新规划</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-04" data-tags=""><div class="time">2026-04-24 10:02:38</div><div class="content"><p>规则：</p><p>1、价值观一致才讨论宏观。</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-04" data-tags=""><div class="time">2026-04-19 14:06:53</div><div class="content"><p>一项资产之所以具有<strong>价值</strong>，是因为在这个社会中一部分人对另一本部分人承担了某些<strong>责任</strong>。</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-04" data-tags=""><div class="time">2026-04-17 11:30:27</div><div class="content"><p>喜欢一个人的时候问自己两个问题，第一我为什么喜欢她，第二她凭什么喜欢我?</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-04" data-tags=""><div class="time">2026-04-14 15:07:44</div><div class="content"><p>他人的观点对于他当下的来说就是<strong>最优解</strong>，哪怕这个观点<strong>客观上是错的</strong>，但在<strong>逻辑闭环</strong>里就是对的，强行纠正你不仅费力不讨好，还会招致他人的记恨，<strong><mark>这是一笔不仅没有收益反而全是风险的赔本买卖。</mark></strong></p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-04" data-tags=""><div class="time">2026-04-14 13:13:09</div><div class="content"><p>你不要因为猴子选了香蕉不要一百块生气。</p><p><strong>每个人估值都不一致。</strong></p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-04" data-tags=""><div class="time">2026-04-12 09:55:52</div><div class="content"><p> 我们都是生存机器，作为运载工具的机器人，其程序是盲目编制的，为的是永久保存所谓基因这种禀性自私的因子。</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-04" data-tags=""><div class="time">2026-04-11 10:53:28</div><div class="content"><p>大脑过于<strong>偷懒</strong>想用不到1年时间去理解20+多年的人，简直是可笑行为。</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-04" data-tags=""><div class="time">2026-04-08 13:58:25</div><div class="content"><p>行动要与思想一致。</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-04" data-tags=""><div class="time">2026-04-08 12:33:05</div><div class="content"><p>如果一件<strong>事未达到预期</strong>，大概率是把一件<strong><mark>复杂</mark></strong><mark>的事情</mark>想得太过于<strong>简单</strong>了。</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-04" data-tags=""><div class="time">2026-04-07 09:48:56</div><div class="content"><p>行动改变意识，意识也可以改变行动。</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-04" data-tags=""><div class="time">2026-04-05 06:22:20</div><div class="content"><p>利用大数定律获利：把正期望的动作，小风险地重复很多次。</p><p>E=成交概率×单次净利润−失败概率×单次损失</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-04" data-tags=""><div class="time">2026-04-04 20:51:17</div><div class="content"><p>两个变量存在正相关或负相关的关系，这并不代表其中一个变量的改变是由另一个变量的变化引起的。</p><p></p><p><strong><mark>相关不等于因果。</mark></strong></p><p>比如冰淇淋销量和溺水人数可能正相关，<br>但不是冰淇淋导致溺水，真正的原因可能是<strong>天气热</strong>。</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-04" data-tags=""><div class="time">2026-04-04 11:19:09</div><div class="content"><p>模糊的准确大于精确的错误</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-04" data-tags=""><div class="time">2026-04-04 09:32:55</div><div class="content"><p>统计数据是<strong>简单易理解</strong>用于<strong>对比</strong>的，局限性是会<strong>丢失背后的信息</strong>。</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-04" data-tags=""><div class="time">2026-04-03 12:15:06</div><div class="content"><p>1927年，海森堡（Werner Heisenberg）提出了量子力学中的“<strong>测不准原理</strong>”，证明不可能在<strong>准确</strong>测量<strong>粒子位置</strong>的同时，又准确测量其<strong>动量</strong>（质量乘以速度）。对于其<strong>位置</strong>知道得越多，对于其<strong>动量</strong>就知道得越少，反过来也是一样。</p><p></p><p>比如抛骰子🎲：</p><p>1、无法预测下次的结果</p><p>2、但是能知道长期趋势（也就是每个点出现次数都回归到平均值）</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-04" data-tags=""><div class="time">2026-04-03 10:57:17</div><div class="content"><p>为什么购买 纳指80% 黄金20%组合？</p><p>1、从历史来看长期纳指趋势是涨 <strong>（事实）</strong></p><p>2、购买黄金有<strong>相关性</strong>的对冲，能抵挡极端的部分尾部风险 （条件是通货膨胀时）</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-04" data-tags=""><div class="time">2026-04-01 14:15:19</div><div class="content"><p><strong>写代码必要流程：</strong></p><ol data-digits="1" style="padding-inline-start: 22px !important; --digits: 1;"><li><p><strong>梳理业务逻辑流程</strong></p></li><li><p><strong>写代码</strong></p></li><li><p><strong><mark>校验代码正确性</mark></strong></p></li></ol></div><div class="files"></div></article>
+<article class="memo" data-month="2026-03" data-tags=""><div class="time">2026-03-31 19:03:59</div><div class="content"><p><strong>保持头脑清醒，才能有意识思考。</strong></p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-03" data-tags=""><div class="time">2026-03-24 12:36:22</div><div class="content"><p>要不断问自己：我相信这件事是真的是因为我希望它是真的，还是有确凿的证据证明它是真的？</p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-03" data-tags=""><div class="time">2026-03-20 17:40:25</div><div class="content"><p><u><strong>是否能证伪=是否能校验</strong></u></p><p>卡尔·波普尔在《科学发现的逻辑》中为科学设定的标准：只有原则上能够证明错误的理论才是科学的。你有理论。你测试它们。如果实验不支持它们，你就放弃它们并尝试其他方法。不能被证伪的理论就不是理论；<strong><mark>不能被证伪的理论就不是理论。这是一种信仰。 </mark></strong></p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-03" data-tags=""><div class="time">2026-03-20 16:59:31</div><div class="content"><p><strong><mark>多使用反向思维</mark></strong></p><p>正向思考问的是：<strong>"我怎么成功？"</strong> 反向思考问的是：<strong>"什么会让我失败？然后避开它。"</strong></p></div><div class="files"></div></article>
+<article class="memo" data-month="2026-03" data-tags=""><div class="time">2026-03-20 16:20:54</div><div class="content"><p><strong><mark>把失败当数据：不是"我失败了"，而是"我得到了一个信息"</mark></strong></p><p></p><p><strong>主要来源：</strong></p><ol data-digits="1" style="padding-inline-start: 22px !important; --digits: 1;"><li><p><strong>爱迪生的实验室文化</strong><br>最广为流传的版本是爱迪生发明灯泡时说的——"我没有失败，我只是发现了一万种行不通的方法"。这是"失败=信息"这个思维方式最早的通俗表达。</p></li><li><p><strong>科学哲学：波普尔的证伪主义</strong><br>哲学家卡尔·波普尔提出，科学进步靠的是"被证伪的假设"，失败的实验和成功的实验一样有价值——都在缩小未知范围。这是学术层面的源头。</p></li><li><p><strong>行为心理学：Carol Dweck 的成长型思维</strong><br>斯坦福心理学教授 Dweck 在《Mindset》这本书里系统化了这个概念——把失败重新定义为"学习信号"而不是"能力判定"。这是近年最影响广泛的版本。</p></li><li><p><strong>硅谷创业文化</strong><br>"Fail fast, learn faster" 这句话在创业圈极度流行，把失败工程化、数据化，变成迭代产品的标准流程。</p></li></ol></div><div class="files"></div></article>
+    </main>
+    <script>
+      (function () {
+        const filter = document.querySelector(".filter");
+        const memos = document.querySelectorAll(".memo");
+        const dateSelect = document.querySelector("#date");
+        const tagSelect = document.querySelector("#tag");
+        const filterButton = document.querySelector("#filter-button");
+        filter.style.display = "flex";
+        filterButton.addEventListener("click", function () {
+          const date = dateSelect.value;
+          const tag = tagSelect.value;
+          memos.forEach(function (memo) {
+            const timeMatches = !date || memo.dataset.month === date;
+            const tags = (memo.dataset.tags || "").split("|");
+            const tagMatches = !tag || tags.includes(tag);
+            memo.style.display = timeMatches && tagMatches ? "block" : "none";
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>
