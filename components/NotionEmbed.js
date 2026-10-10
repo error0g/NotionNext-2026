@@ -6,6 +6,8 @@ export const HTML_ARTIFACT_RESIZE_MESSAGE = 'notion-next:html-artifact-resize'
 export const HTML_ARTIFACT_MEASURE_MESSAGE = 'notion-next:html-artifact-measure'
 export const HTML_ARTIFACT_MIN_HEIGHT = 32
 export const HTML_ARTIFACT_MAX_HEIGHT = 4096
+const NOTION_EMBED_HOST = 'embed.notion.co'
+const NOTION_EMBED_IFRAME_PATH = '/api/iframe'
 
 const HTML_ARTIFACT_RESIZE_BRIDGE = `<script data-notion-next-auto-height>
 (() => {
@@ -125,6 +127,30 @@ export const normalizeHtmlArtifactHeight = value => {
   )
 }
 
+export const getDirectEmbedSource = source => {
+  if (typeof source !== 'string' || !source) return source
+
+  try {
+    const notionEmbedUrl = new URL(source)
+    if (
+      notionEmbedUrl.hostname !== NOTION_EMBED_HOST ||
+      notionEmbedUrl.pathname !== NOTION_EMBED_IFRAME_PATH
+    ) {
+      return source
+    }
+
+    const directSource = notionEmbedUrl.searchParams.get('url')
+    if (!directSource) return source
+
+    const directUrl = new URL(directSource)
+    if (!['http:', 'https:'].includes(directUrl.protocol)) return source
+
+    return directUrl.toString()
+  } catch {
+    return source
+  }
+}
+
 const getConfiguredHeight = (block, isHtmlArtifact) => {
   const height = Number(block?.format?.block_height)
   if (Number.isFinite(height) && height > 0) return height
@@ -138,6 +164,7 @@ const NotionEmbed = ({ block }) => {
     recordMap?.signed_urls?.[block?.id] ||
     block?.format?.display_source ||
     block?.properties?.source?.[0]?.[0]
+  const directSource = getDirectEmbedSource(source)
   const isHtmlArtifact =
     block?.type === 'embed' && block?.format?.embed_variant === 'html_artifact'
   const isNotionTabs =
@@ -191,7 +218,7 @@ const NotionEmbed = ({ block }) => {
 
   if (
     !srcDoc &&
-    (typeof source !== 'string' || source.startsWith('attachment:'))
+    (typeof directSource !== 'string' || directSource.startsWith('attachment:'))
   ) {
     return null
   }
@@ -209,7 +236,7 @@ const NotionEmbed = ({ block }) => {
         <iframe
           ref={iframeRef}
           className='notion-asset-object-fit'
-          src={resizableSrcDoc ? undefined : source}
+          src={resizableSrcDoc ? undefined : directSource}
           srcDoc={resizableSrcDoc}
           title={title}
           frameBorder='0'

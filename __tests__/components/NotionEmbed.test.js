@@ -6,6 +6,7 @@ import NotionEmbed, {
   HTML_ARTIFACT_MEASURE_MESSAGE,
   HTML_ARTIFACT_MIN_HEIGHT,
   HTML_ARTIFACT_RESIZE_MESSAGE,
+  getDirectEmbedSource,
   normalizeHtmlArtifactHeight,
   withHtmlArtifactResizeBridge
 } from '@/components/NotionEmbed'
@@ -129,6 +130,26 @@ describe('NotionEmbed HTML artifact auto height', () => {
     expect(frame.parentElement).toHaveStyle('height: 300px')
   })
 
+  it('uses the target URL instead of the Notion embed proxy', () => {
+    render(
+      <NotionEmbed
+        block={{
+          id: 'notion-proxy-embed-1',
+          type: 'embed',
+          format: {
+            display_source:
+              'https://embed.notion.co/api/iframe?url=https%3A%2F%2Fimgchr.com%2Fi%2FpZEEDED&key=notion-key'
+          }
+        }}
+      />
+    )
+
+    expect(screen.getByTitle('iframe embed')).toHaveAttribute(
+      'src',
+      'https://imgchr.com/i/pZEEDED'
+    )
+  })
+
   it('renders Notion tabs embeds without requiring an iframe source', () => {
     render(
       <NotionEmbed
@@ -186,5 +207,24 @@ describe('HTML artifact resize helpers', () => {
     expect(fragment).toMatch(
       /^<main>Content<\/main>\n<script data-notion-next-auto-height>/
     )
+  })
+})
+
+describe('Notion embed source helpers', () => {
+  it('extracts an HTTP target from the Notion iframe endpoint', () => {
+    expect(
+      getDirectEmbedSource(
+        'https://embed.notion.co/api/iframe?url=https%3A%2F%2Fexample.com%2Fimage.png&key=notion-key'
+      )
+    ).toBe('https://example.com/image.png')
+  })
+
+  it('keeps unrelated or unsafe embed sources unchanged', () => {
+    const ordinarySource = 'https://example.com/widget'
+    const unsafeSource =
+      'https://embed.notion.co/api/iframe?url=javascript%3Aalert(1)'
+
+    expect(getDirectEmbedSource(ordinarySource)).toBe(ordinarySource)
+    expect(getDirectEmbedSource(unsafeSource)).toBe(unsafeSource)
   })
 })
